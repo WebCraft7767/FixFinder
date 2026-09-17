@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FixFinder | Local repairs, made easy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'Roboto', 'ui-sans-serif', 'system-ui'] },
+          colors: {
+            ink: '#0f172a',
+            tealx: '#14b8a6',
+            cyanx: '#06b6d4',
+            amberx: '#f59e0b'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="font-sans text-slate-900">
+
+<header class="sticky top-0 z-40 border-b border-slate-200/80 glass">
+  <div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+    <a href="#" class="flex shrink-0 items-center gap-2 text-xl font-black tracking-tight">
+      <span class="grid h-9 w-9 place-items-center rounded-xl bg-slate-900 text-white shadow-sm">⌁</span>
+      Fix<span class="text-teal-600">Finder</span>
+    </a>
+
+    <button id="locationBtn" class="focus-ring hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 md:flex" aria-label="Change location">
+      <span>📍</span><span id="locationText">Near Campus / Neighborhood</span><span class="text-slate-400">⌄</span>
+    </button>
+
+    <nav class="ml-auto hidden items-center gap-6 text-sm font-semibold text-slate-600 lg:flex">
+      <a class="hover:text-slate-950" href="#fixers">Find a Fixer</a>
+      <a class="hover:text-slate-950" href="#how">How It Works</a>
+      <a class="hover:text-slate-950" href="#student">Student Deals</a>
+      <a class="hover:text-slate-950" href="#become">Become a Fixer</a>
+    </nav>
+
+    <button id="mobileMenuBtn" class="focus-ring rounded-xl border border-slate-200 p-2 lg:hidden" aria-label="Open menu">☰</button>
+    <button id="postBtn" class="focus-ring rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800">
+      Post a Fix Request
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden border-t border-slate-200 bg-white px-4 py-4 lg:hidden">
+    <div class="grid gap-2 text-sm font-semibold">
+      <a class="rounded-lg p-2 hover:bg-slate-50" href="#fixers">Find a Fixer</a>
+      <a class="rounded-lg p-2 hover:bg-slate-50" href="#how">How It Works</a>
+      <a class="rounded-lg p-2 hover:bg-slate-50" href="#student">Student Deals</a>
+      <a class="rounded-lg p-2 hover:bg-slate-50" href="#become">Become a Fixer</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="relative overflow-hidden bg-slate-950">
+  <div class="absolute -left-32 -top-40 h-96 w-96 rounded-full bg-teal-500/20 blur-3xl"></div>
+  <div class="absolute -right-32 top-20 h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <div class="max-w-3xl">
+      <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm font-semibold text-teal-200">
+        <span>✓</span> Local. Vetted. Budget-friendly.
+      </div>
+      <h1 class="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Fast, Budget-Friendly Repairs Right in Your Neighborhood.
+      </h1>
+      <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+        Connecting students and locals with top-rated local technicians for tech, bikes, home fixes, and more.
+      </p>
+
+      <div class="mt-8 rounded-2xl bg-white p-2 shadow-2xl">
+        <div class="grid gap-2 md:grid-cols-[1fr_220px_auto]">
+          <label class="flex items-center gap-3 rounded-xl bg-slate-50 px-4">
+            <span class="text-lg">⌕</span>
+            <input id="searchInput" class="focus-ring w-full bg-transparent py-3 text-sm font-medium outline-none" placeholder="What needs fixing? e.g. screen repair" />
+          </label>
+          <label class="flex items-center gap-3 rounded-xl bg-slate-50 px-4">
+            <span>📍</span>
+            <input id="zipInput" class="focus-ring w-full bg-transparent py-3 text-sm font-medium outline-none" placeholder="Neighborhood / ZIP" />
+          </label>
+          <button id="searchBtn" class="focus-ring rounded-xl bg-teal-500 px-6 py-3 font-bold text-slate-950 transition hover:bg-teal-400">Search</button>
+        </div>
+      </div>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        <button data-category="Tech & Laptops" class="filter focus-ring rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm font-semibold text-white hover:bg-white/10">📱 Tech & Laptops</button>
+        <button data-category="Bikes & Scooters" class="filter focus-ring rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm font-semibold text-white hover:bg-white/10">🚲 Bikes & Scooters</button>
+        <button data-category="Furniture Assembly" class="filter focus-ring rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm font-semibold text-white hover:bg-white/10">🪑 Furniture Assembly</button>
+        <button data-category="Small Appliances" class="filter focus-ring rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm font-semibold text-white hover:bg-white/10">⚡ Small Appliances</button>
+        <button data-category="Student Specials" class="filter focus-ring rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm font-semibold text-white hover:bg-white/10">🎓 Student Specials</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mapSection" class="mx-auto max-w-7xl px-4 pt-14 sm:px-6 lg:px-8">
+  <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+    <div>
+      <p class="text-sm font-bold uppercase tracking-widest text-teal-600">Explore nearby</p>
+      <h2 class="mt-2 text-3xl font-black tracking-tight">Fixers on the Map</h2>
+      <p class="mt-2 text-slate-500">Tap a marker to see the technician, rating, starting rate, and service.</p>
+    </div>
+    <button id="locateMeBtn" class="focus-ring rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50">
+      📍 Use My Location
+    </button>
+  </div>
+  <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <div id="fixerMap" class="h-[360px] w-full sm:h-[440px]" aria-label="Map showing nearby FixFinder technicians"></div>
+  </div>
+  <p id="mapStatus" class="mt-3 text-xs text-slate-500">Demo map centered on Varanasi. Location access is optional.</p>
+</section>
+
+<section id="fixers" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+    <div>
+      <p class="text-sm font-bold uppercase tracking-widest text-teal-600">Trusted locally</p>
+      <h2 class="mt-2 text-3xl font-black tracking-tight">Fixers Near You</h2>
+      <p id="resultsText" class="mt-2 text-slate-500">Showing reliable technicians and handy services.</p>
+    </div>
+    <div class="flex items-center gap-2 rounded-full border border-slate-200 bg-white p-1">
+      <button id="studentToggle" class="focus-ring rounded-full bg-slate-900 px-4 py-2 text-sm font-bold text-white">Student View</button>
+      <button id="residentToggle" class="focus-ring rounded-full px-4 py-2 text-sm font-bold text-slate-600">Resident View</button>
+    </div>
+  </div>
+
+  <div id="cards" class="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3"></div>
+</section>
+
+<section id="student" class="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
+  <div class="overflow-hidden rounded-3xl bg-gradient-to-br from-teal-600 to-cyan-600 p-7 text-white shadow-xl sm:p-10">
+    <div class="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+      <div>
+        <span class="rounded-full bg-white/15 px-3 py-1.5 text-sm font-bold">🎓 Student Hub</span>
+        <h2 class="mt-4 text-3xl font-black">Save more on the fixes students need most.</h2>
+        <p class="mt-3 max-w-2xl text-teal-50">Show your student ID and unlock verified local discounts on laptops, cracked screens, bikes, and dorm furniture.</p>
+      </div>
+      <div class="rounded-2xl bg-white p-6 text-center text-slate-900 shadow-xl">
+        <div class="text-5xl font-black">15%</div>
+        <div class="mt-1 font-bold">student discount</div>
+        <div class="mt-2 text-xs text-slate-500">on selected tech & screen fixes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="border-y border-slate-200 bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <p class="text-sm font-bold uppercase tracking-widest text-teal-600">Simple by design</p>
+      <h2 class="mt-2 text-3xl font-black tracking-tight">How It Works</h2>
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      <div class="card rounded-2xl border border-slate-200 p-6">
+        <div class="grid h-12 w-12 place-items-center rounded-xl bg-teal-50 text-xl">1</div>
+        <h3 class="mt-5 text-xl font-extrabold">Describe Your Fix</h3>
+        <p class="mt-2 leading-6 text-slate-500">Upload a photo, explain the issue, and set the budget you are comfortable with.</p>
+      </div>
+      <div class="card rounded-2xl border border-slate-200 p-6">
+        <div class="grid h-12 w-12 place-items-center rounded-xl bg-cyan-50 text-xl">2</div>
+        <h3 class="mt-5 text-xl font-extrabold">Match Local Fixers</h3>
+        <p class="mt-2 leading-6 text-slate-500">Compare nearby offers, ratings, response times, badges, and reviews.</p>
+      </div>
+      <div class="card rounded-2xl border border-slate-200 p-6">
+        <div class="grid h-12 w-12 place-items-center rounded-xl bg-amber-50 text-xl">3</div>
+        <h3 class="mt-5 text-xl font-extrabold">Get It Fixed</h3>
+        <p class="mt-2 leading-6 text-slate-500">Book the best match, communicate safely, and pay when the job is done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  <div class="grid gap-5 md:grid-cols-3">
+    <div class="rounded-2xl bg-slate-900 p-6 text-white"><div class="text-2xl">🪪</div><h3 class="mt-4 font-extrabold">ID Verification</h3><p class="mt-2 text-sm leading-6 text-slate-300">Identity checks help build a more trustworthy local marketplace.</p></div>
+    <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200"><div class="text-2xl">💬</div><h3 class="mt-4 font-extrabold">Transparent Pricing</h3><p class="mt-2 text-sm leading-6 text-slate-500">See starting rates and compare offers before committing.</p></div>
+    <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200"><div class="text-2xl">⭐</div><h3 class="mt-4 font-extrabold">Local Reviews</h3><p class="mt-2 text-sm leading-6 text-slate-500">Neighborhood feedback and service badges make good fixers easier to spot.</p></div>
+  </div>
+</section>
+
+<section id="become" class="bg-slate-100">
+  <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div class="flex flex-col items-start justify-between gap-5 rounded-3xl border border-slate-200 bg-white p-7 sm:p-10 md:flex-row md:items-center">
+      <div><p class="text-sm font-bold uppercase tracking-widest text-teal-600">For local technicians</p><h2 class="mt-2 text-2xl font-black">Turn your repair skills into local gigs.</h2><p class="mt-2 text-slate-500">Create a profile, showcase your skills, and reach nearby customers.</p></div>
+      <button id="becomeBtn" class="focus-ring rounded-xl bg-slate-900 px-5 py-3 font-bold text-white hover:bg-slate-800">Become a Fixer</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="bg-slate-950 text-slate-400">
+  <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="font-bold text-white">Fix<span class="text-teal-400">Finder</span></div>
+    <div>Local repairs. Better matched.</div>
+    <div>© 2026 FixFinder</div>
+  </div>
+</footer>
+
+<div id="modal" class="fixed inset-0 z-50 hidden items-end justify-center bg-slate-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-4">
+  <div class="w-full max-w-lg rounded-t-3xl bg-white p-6 shadow-2xl sm:rounded-3xl">
+    <div class="flex items-start justify-between">
+      <div><p class="text-sm font-bold text-teal-600">Quick Post</p><h2 class="mt-1 text-2xl font-black">What needs fixing?</h2></div>
+      <button id="closeModal" class="focus-ring rounded-xl p-2 text-xl hover:bg-slate-100" aria-label="Close">×</button>
+    </div>
+    <form id="jobForm" class="mt-6 grid gap-4">
+      <label class="text-sm font-bold">Service
+        <input required name="service" class="focus-ring mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none" placeholder="e.g. laptop repair" />
+      </label>
+      <label class="text-sm font-bold">Describe the problem
+        <textarea required name="details" rows="3" class="focus-ring mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none" placeholder="Tell a fixer what is wrong..."></textarea>
+      </label>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="text-sm font-bold">Budget
+          <input name="budget" class="focus-ring mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none" placeholder="₹ / $ max" />
+        </label>
+        <label class="text-sm font-bold">Location
+          <input required name="location" class="focus-ring mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none" placeholder="Neighborhood / ZIP" />
+        </label>
+      </div>
+      <button class="focus-ring rounded-xl bg-teal-500 px-5 py-3.5 font-black text-slate-950 hover:bg-teal-400">Post Request</button>
+      <p id="formMessage" class="hidden rounded-xl bg-teal-50 p-3 text-sm font-semibold text-teal-800"></p>
+    </form>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<!-- Link to external JavaScript file -->
+<script src="script.js"></script>
+</body>
+</html>
