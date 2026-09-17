@@ -105,22 +105,9 @@ Open the main HTML file in your browser.
 
 For the best development experience, use VS Code with Live Server or another local development server.
 
-📂 Project Structure
 FixFinder/
-│
 ├── index.html
 ├── README.md
-│
-├── css/
-│   └── style.css
-│
-├── js/
-│   └── app.js
-│
-├── assets/
-│   ├── images/
-│   └── icons/
-│
 └── LICENSE
 
 The current prototype may still use a simpler single-file structure. This structure represents the intended direction for the project as it develops.
