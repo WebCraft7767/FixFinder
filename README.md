@@ -93,7 +93,7 @@ Note: The current prototype uses demo fixer coordinates around Varanasi. The map
 
 🚀 Getting Started
 1. Clone the repository
-git clone https://github.com/YOUR-USERNAME/FixFinder.git
+git clone https://github.com/WebCraft7767/FixFinder.git
 2. Open the project
 
 Navigate into the project folder:
