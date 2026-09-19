@@ -6,6 +6,10 @@ FixFinder is a modern web application designed to connect students and local res
 
 Whether you need a phone repaired, a bicycle tuned up, furniture fixed, or another everyday service, FixFinder helps you discover suitable local technicians through a simple, location-based interface.
 
+## 📸 Preview For the FixFinder
+
+FixFinder Preview [https://github.com/WebCraft7767/FixFinder/blob/main/FixFinder_Preview.jpeg]
+
 ✨ Features
 🗺️ Interactive Map
 Built with Leaflet.js
