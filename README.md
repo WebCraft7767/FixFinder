@@ -12,7 +12,7 @@ FixFinder Preview [https://github.com/WebCraft7767/FixFinder/blob/main/FixFinder
 
 
 ## 🎬 Demo
-▶️ Watch FixFinder Demo[(FixFinder_Demo.mp4)]
+▶️ Watch FixFinder Demo [(https://github.com/WebCraft7767/FixFinder/blob/main/FixFinder_Demo.mp4)]
 
 ✨ Features
 🗺️ Interactive Map
