@@ -4,13 +4,13 @@ FixFinder is a modern web application designed to help students and local reside
 
 Whether you need a phone repaired, a bicycle tuned up, furniture fixed, or another everyday service, FixFinder helps you discover suitable local technicians through a simple, location-based interface.
 
-## 📸 Preview For the FixFinder
+## 📸 Preview
 
-FixFinder Preview [https://github.com/WebCraft7767/FixFinder/blob/main/FixFinder_Preview.jpeg]
-
+[🔍 View FixFinder Preview](FixFinder_Preview.jpeg)
 
 ## 🎬 Demo
-▶️ Watch FixFinder Demo [https://github.com/WebCraft7767/FixFinder/blob/main/FixFinder_Demo.mp4]
+
+[▶️ Watch FixFinder Demo](FixFinder_Demo.mp4)
 
 ✨ Features
 🗺️ Interactive Map
@@ -19,14 +19,17 @@ Uses OpenStreetMap tiles
 Displays local fixer locations with interactive markers
 Automatically updates when search filters change
 Automatically fits the map to currently visible fixers
+
 📍 Location Services
 Use My Location functionality
 Browser-based geolocation
 Helps users find services around their current location
+
 🔎 Search & Filtering
 Search for specific repair services
 Filter available fixers based on relevant criteria
 Map markers update alongside the filtered results
+
 👨‍🔧 Fixer Information
 
 Each fixer can display information such as:
@@ -36,6 +39,7 @@ Each fixer can display information such as:
 ⏱️ Response time
 🎓 Student discounts
 📍 Location
+
 📱 Responsive Design
 
 Designed to work across:
@@ -43,6 +47,7 @@ Designed to work across:
 💻 Desktop
 📱 Mobile
 🖥️ Larger screens
+
 🎯 Problem
 
 Finding a trustworthy local technician can be surprisingly difficult.
@@ -73,6 +78,7 @@ JavaScript	Application logic and interactions
 Leaflet.js	Interactive maps
 OpenStreetMap	Map data and tiles
 Browser Geolocation API	User location
+
 🗺️ Map Architecture
 
 FixFinder currently uses Leaflet.js + OpenStreetMap for its mapping functionality.
@@ -98,25 +104,39 @@ FixFinder currently uses Leaflet.js + OpenStreetMap for its mapping functionalit
 Note: The current prototype uses demo fixer coordinates around Varanasi. The map requires an internet connection to load OpenStreetMap tiles.
 
 🚀 Getting Started
+
 1. Clone the repository
+
+```bash
 git clone https://github.com/WebCraft7767/FixFinder.git
+```
+
 2. Open the project
 
 Navigate into the project folder:
 
+```bash
 cd FixFinder
+```
+
 3. Run the application
 
-Open the main HTML file in your browser.
+Open `index.html` in your browser.
 
 For the best development experience, use VS Code with Live Server or another local development server.
 
+Project structure:
+
+```text
 FixFinder/
 ├── index.html
+├── style.css
+├── script.js
+├── FixFinder_Preview.jpeg
+├── FixFinder_Demo.mp4
 ├── README.md
 └── LICENSE
-
-The current prototype may still use a simpler single-file structure. This structure represents the intended direction for the project as it develops.
+```
 
 🧪 Current Prototype
 
@@ -210,7 +230,7 @@ Possible categories include:
 👟 Shoe & Leather Repair
 📚 Student Services
 
-The long-term goal is to make finding a reliable local service provider as simple as searching for one nearby.
+The long-term goal is to make finding a local service provider as simple as searching for one nearby.
 
 🤝 Contributing
 
@@ -223,7 +243,11 @@ Create a new branch
 Make your changes
 Test the changes
 Submit a pull request
+
+```bash
 git checkout -b feature/your-feature
+```
+
 📜 License
 
 FixFinder is open-source software.
@@ -239,7 +263,7 @@ The technician profiles and locations shown in the prototype are demonstration d
 👨‍💻 Project
 
 FixFinder
-A local-first platform for discovering reliable repair services.
+A local-first platform for discovering nearby repair services.
 
 Built with ❤️ using HTML, CSS, JavaScript, Leaflet.js, and OpenStreetMap.
 
