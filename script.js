@@ -1,10 +1,10 @@
 const fixers = [
-  { name:'Maya Tech Care', category:'Tech & Laptops', specialty:'Laptop & Screen Repair', rating:4.9, rate:299, response:'~12 min', badges:['Student Verified','Neighborhood Favorite'], discount:15, initials:'MT', icon:'💻', lat:25.3176, lng:82.9739 },
-  { name:'Ravi Bike Works', category:'Bikes & Scooters', specialty:'Bike Tune-ups & Scooters', rating:4.8, rate:199, response:'~20 min', badges:['Neighborhood Favorite'], discount:10, initials:'RB', icon:'🚲', lat:25.3220, lng:82.9850 },
-  { name:'QuickFix Furniture', category:'Furniture Assembly', specialty:'Furniture Assembly', rating:4.9, rate:249, response:'~25 min', badges:['Student Verified'], discount:12, initials:'QF', icon:'🪑', lat:25.3105, lng:82.9680 },
-  { name:'Apex Appliance Care', category:'Small Appliances', specialty:'Fans, mixers & small appliances', rating:4.7, rate:349, response:'~35 min', badges:['Verified'], discount:8, initials:'AA', icon:'⚡', lat:25.3290, lng:82.9790 },
-  { name:'Campus Laptop Lab', category:'Tech & Laptops', specialty:'Laptop diagnostics & upgrades', rating:5.0, rate:399, response:'~10 min', badges:['Student Verified','Top Rated'], discount:15, initials:'CL', icon:'🛠️', lat:25.3150, lng:82.9920 },
-  { name:'Neighborhood HandyPro', category:'Furniture Assembly', specialty:'Furniture, shelves & minor home fixes', rating:4.8, rate:299, response:'~30 min', badges:['Neighborhood Favorite'], discount:5, initials:'NH', icon:'🔧', lat:25.3050, lng:82.9800 }
+  { name:'Maya Tech Care', category:'Tech & Laptops', specialty:'Laptop & Screen Repair', rating:4.9, rate:299, response:'~12 min', badges:['Student Focus','Popular Example'], discount:15, initials:'MT', icon:'💻', lat:25.3176, lng:82.9739 },
+  { name:'Ravi Bike Works', category:'Bikes & Scooters', specialty:'Bike Tune-ups & Scooters', rating:4.8, rate:199, response:'~20 min', badges:['Popular Example'], discount:10, initials:'RB', icon:'🚲', lat:25.3220, lng:82.9850 },
+  { name:'QuickFix Furniture', category:'Furniture Assembly', specialty:'Furniture Assembly', rating:4.9, rate:249, response:'~25 min', badges:['Student Focus'], discount:12, initials:'QF', icon:'🪑', lat:25.3105, lng:82.9680 },
+  { name:'Apex Appliance Care', category:'Small Appliances', specialty:'Fans, mixers & small appliances', rating:4.7, rate:349, response:'~35 min', badges:['Demo Listing'], discount:8, initials:'AA', icon:'⚡', lat:25.3290, lng:82.9790 },
+  { name:'Campus Laptop Lab', category:'Tech & Laptops', specialty:'Laptop diagnostics & upgrades', rating:5.0, rate:399, response:'~10 min', badges:['Student Focus','Example Rating'], discount:15, initials:'CL', icon:'🛠️', lat:25.3150, lng:82.9920 },
+  { name:'Neighborhood HandyPro', category:'Furniture Assembly', specialty:'Furniture, shelves & minor home fixes', rating:4.8, rate:299, response:'~30 min', badges:['Popular Example'], discount:5, initials:'NH', icon:'🔧', lat:25.3050, lng:82.9800 }
 ];
 
 let currentCategory = 'All';
@@ -33,7 +33,7 @@ function popupHtml(f) {
       <div style="margin-top:8px;font-weight:800;color:#b45309">★ ${f.rating}</div>
       <div style="margin-top:4px;color:#334155;font-size:13px">From ₹${f.rate}/hr · ${f.response}</div>
       ${studentView ? `<div style="margin-top:7px;color:#0f766e;font-weight:700;font-size:12px">🎓 ${f.discount}% student discount</div>` : ''}
-      <button onclick="book('${f.name.replace(/'/g, "\\'")}')" style="margin-top:10px;width:100%;border:0;border-radius:9px;padding:8px 10px;background:#0f172a;color:white;font-weight:700;cursor:pointer">Book / Message</button>
+      <button onclick="book('${f.name.replace(/'/g, "\\'")}')" style="margin-top:10px;width:100%;border:0;border-radius:9px;padding:8px 10px;background:#0f172a;color:white;font-weight:700;cursor:pointer">Start Demo Request</button>
     </div>`;
 }
 
@@ -104,8 +104,8 @@ function renderCards() {
         <div><div class="text-slate-400">Response</div><div class="mt-1 font-black">${f.response}</div></div>
       </div>
       <div class="mt-4 flex gap-2">
-        <button onclick="book('${f.name}')" class="focus-ring flex-1 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-slate-800">Book / Message</button>
-        <button onclick="book('${f.name}')" class="focus-ring rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold hover:bg-slate-50">View</button>
+        <button onclick="book('${f.name}')" class="focus-ring flex-1 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-slate-800">Start Demo Request</button>
+        <button onclick="focusFixer('${f.name}')" class="focus-ring rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold hover:bg-slate-50">View Demo</button>
       </div>
     </article>
   `).join('') : `<div class="md:col-span-2 xl:col-span-3 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center"><div class="text-3xl">🔎</div><h3 class="mt-3 font-black">No matching fixers</h3><p class="mt-1 text-slate-500">Try another service or switch to Resident View.</p></div>`;
