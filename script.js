@@ -129,8 +129,16 @@ document.querySelectorAll('.filter').forEach(btn => btn.addEventListener('click'
   document.getElementById('fixers').scrollIntoView({behavior:'smooth'});
 }));
 
-document.getElementById('searchBtn').addEventListener('click', renderCards);
-document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key === 'Enter') renderCards(); });
+document.getElementById('searchBtn').addEventListener('click', () => {
+  const location = document.getElementById('zipInput').value.trim();
+  if (location) {
+    document.getElementById('locationText').textContent = 'Near ' + location;
+    document.getElementById('mapStatus').textContent = 'Demo listings are being explored for ' + location + '. Fixer locations remain demonstration data.';
+  }
+  renderCards();
+});
+document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('searchBtn').click(); });
+document.getElementById('zipInput').addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('searchBtn').click(); });
 
 document.getElementById('studentToggle').addEventListener('click', () => {
   studentView = true;
