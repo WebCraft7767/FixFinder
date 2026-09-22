@@ -66,11 +66,12 @@ FixFinder aims to make this process faster, clearer, and more local.
 
 FixFinder brings local repair services into one simple interface.
 
-User → Search → Compare → Locate → Contact
+User → Search → Compare → Explore → Start Demo Request
 
-The goal is to make it easier for users to discover nearby technicians while giving local service providers a way to become more visible.
+The prototype demonstrates how users could discover nearby technicians, compare example listings, explore them on a map, and start a sample request.
 
 🛠️ Tech Stack
+
 Technology	Purpose
 HTML5	Application structure
 CSS3	Styling and responsive design
@@ -145,57 +146,33 @@ The current version focuses on the front-end experience and core concept.
 Currently implemented
 
 Responsive interface
-
 Search functionality
-
 Fixer filtering
-
 Interactive Leaflet map
-
 Fixer markers
-
 Marker popups
-
 Ratings and pricing information
-
 Student discount information
-
 Browser geolocation
-
 Dynamic map filtering
-
 Demo local fixer data
 
 Planned
 
 User accounts
-
 Technician accounts
-
 Real fixer database
-
 Technician verification
-
 Real-time availability
-
 Booking system
-
 In-app messaging
-
 Reviews and ratings
-
 User profiles
-
 Service categories
-
 Distance-based sorting
-
 Secure payments
-
 Admin dashboard
-
 Backend API
-
 Database integration
 
 🔐 Trust & Verification
